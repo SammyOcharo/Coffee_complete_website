@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+
+
+    <title>OCHARO COFFEE HUB</title>
+    <script type="text/javascript">
+        var user = '{{ request.user }}'
+
+        function getToken(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        const csrftoken = getToken('csrftoken');
+    </script>
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="{% static 'images/logo.png' %}">
+
+
+
+</head>
+
+<body>
+
+    <!-- header section starts  -->
+
+    <header class="header">
+
+        <a href="#" class="logo">
+            <img src="{% static 'images/logo.png' %}" alt="">
+        </a>
+
+        <nav class="navbar">
+            <a href="#home">home</a>
+            <a href="#about">about</a>
+            <a href="#menu">menu</a>
+            <a href="#products">products</a>
+            <a href="#review">review</a>
+            <a href="#contact">contact</a>
+            <a href="#blogs">blogs</a>
+        </nav>
+
+        <div class="icons">
+            <div class="fas fa-search" id="search-btn"></div>
+            <div class="fas fa-shopping-cart" id="cart-btn"><sup style="margin: 2px;">{{ cartItems }}</sup></div>
+            <div class="fas fa-bars" id="menu-btn"></div>
+        </div>
+
+        <div class="search-form">
+            <input type="search" id="search-box" placeholder="search here...">
+            <label for="search-box" class="fas fa-search"></label>
+        </div>
+        <div class="cart-items-container">
+            {% for item in items %}
+            <div class="cart-item">
+                <span class="fas fa-times"></span>
+                <img src="{{ item.product.Coffee_image }}" alt="">
+                <div class="content">
+                    <h3>{{ item.product.Coffee_name }}
+                        <img data-product={{ item.product.id }} data-action="add" style="width: 15px; height: 15px; margin: 5px; padding-left: 3px; float: right; cursor: pointer;" src="{% static 'images/plus.jpg' %}" alt="">
+                        <img data-product={{ item.product.id }} data-action="remove" style="width: 15px; height: 15px; margin: 5px; padding-left: 3px; float: right; cursor: pointer;" src="{% static 'images/minus.jpg' %}" alt="">
+                    </h3>
+                    <p class="product-quantity">{{ item.quantity }}</p>
+                    <div class="price">$ {{ item.get_total | floatformat:2 }}/-</div>
+                </div>
+            </div>
+            {% empty %}
+            <h2 style="text-align: center;">No order on the Cart</h2>
+            {% endfor %}
+            <div class="cart-item">
+                <div class="content">
+                    <h3>Total Items on order {{ order.get_cart_items }}</h3>
+                    <div class="price">Total Price $ {{ order.get_cart_total | floatformat:2 }}/-</div>
+                </div>
+            </div>
+            <a href="{% url 'landingPage' %}" class="btn">Continue with Order</a>
+            <a href="{% url 'payment' %}" class="btn">Proceed to Pay</a>
+        </div>
+        <div class="social-media">
+            <p class="mb-0 d-flex">
+                {% if user.is_authenticated %}
+                <a href="#" style="margin-top: 10px; margin-bottom: 4px;" class="d-flex align-items-center justify-content-center"><button type="button" class="btn btn-dark">
+                    Profile
+                    </button>
+                </a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <a href="{% url 'handlelogout' %}" style="margin-top: 10px; margin-bottom: 4px;" class="d-flex align-items-center justify-content-center"><button type="button" class="btn btn-dark">
+                    Logout
+                    </button>
+                </a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {% else %}
+                <a href="{% url 'signup' %}" style="margin-top: 10px;" class="d-flex align-items-center justify-content-center"><button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter" >
+                    Register
+                    </button>
+                </a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <a href="{% url 'login' %}" style="margin-top: 10px; margin-right: 5px; margin-bottom: 4px;" class="d-flex align-items-center justify-content-center"><button type="button" class="btn btn-dark">
+                    Login
+                    </button>
+                </a>{% endif %}
+            </p>
+
+        </div>
+
+    </header>
+    <div class="messages" id="alert-message">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} mb-0 alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+        </div>
+        {% endfor %}
+    </div>
+    {% block content %} {% endblock content %}
+
+    <!-- custom js file link  -->
+    <script src="{% static 'main.js' %}"></script>
+    <script type="text/javascript" src="{% static 'cart.js' %}"></script>
+</body>
+
+</html>

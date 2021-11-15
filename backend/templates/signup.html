@@ -1,0 +1,57 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="login_container">
+    <div class="wrapper">
+        <h2>CAFENA Sign Up Form</h2>
+        <div>
+            <div class="messages" id="alert-message">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} mb-0 alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                </div>
+                {% endfor %}
+            </div>
+            <form action="{% url 'handlesignup' %}" method="post">
+                {% csrf_token %}
+                <div class="input_group">
+                    <div class="input_box">
+                        <input type="text" name="username" placeholder="Enter Username" required class="name">
+                        <i class="fa fa-user icon"></i>
+                    </div>
+                </div>
+                <div class="input_group">
+                    <div class="input_box">
+                        <input type="email" name="email" placeholder="Email Address" required class="name">
+                        <i class="fa fa-envelope icon"></i>
+                    </div>
+                </div>
+                <div class="input_group">
+                    <div class="input_box">
+                        <input type="password" name="password1" placeholder="Input password" required class="name">
+                        <i class="fa fa-key icon"></i>
+                    </div>
+                </div>
+                <div class="input_group">
+                    <div class="input_box">
+                        <input type="password" name="password2" placeholder="Retype password" required class="name">
+                        <i class="fa fa-key icon"></i>
+                    </div>
+                </div>
+                <div class="form-group" style="text-align: center; padding-bottom: 5px;">
+                    <button type="submit" class="btn btn-block create-account">Create Account</button>
+                </div>
+            </form>
+        </div>
+        <div class="footer_login">
+            <div style="font-size:small; text-align: center;">
+                Have an account?<a href="{% url 'login' %}"> Login</a>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+{% endblock %}

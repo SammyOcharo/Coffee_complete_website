@@ -1,0 +1,51 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="login_container">
+    <div class="wrapper">
+        <h2>CAFENA Login Form</h2>
+        <div>
+            <div class="messages" id="alert-message">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} mb-0 alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                </div>
+                {% endfor %}
+            </div>
+            <form action="{% url 'handlelogin' %}" method="post">
+                {% csrf_token %}
+                <div class="input_group">
+                    <div class="input_box">
+                        <input type="text" name="username" placeholder="Enter Username" required class="name">
+                        <i class="fa fa-user icon"></i>
+                    </div>
+                </div>
+                <div class="input_group">
+                    <div class="input_box">
+                        <input type="password" name="password" placeholder="Input password" required class="name">
+                        <i class="fa fa-key icon"></i>
+                    </div>
+                </div>
+                <div class="row align-items-center remember">
+                    <input type="checkbox" style="font-weight: bold;"> Remember Me
+                </div>
+                <div class="form-group" style="text-align: center; padding-bottom: 5px;">
+                    <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+                </div>
+            </form>
+        </div>
+        <div class="footer_login">
+            <div style="font-size:small; text-align: center;">
+                Don't have an account?<a href="{% url 'signup' %}"> Sign Up</a>
+            </div>
+            <div style="text-align: center; padding: 1em;">
+                <a href="#">Forgot your password?</a>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+{% endblock %}
