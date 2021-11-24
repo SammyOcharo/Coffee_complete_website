@@ -10,7 +10,7 @@ class GetInTouch(models.Model):
 
 
 class Blogs(models.Model):
-    Images = models.ImageField(upload_to = 'static/images/')
+    Images = models.ImageField(upload_to = './backend/static/media/')
     Title = models.CharField(max_length=50)
     Writer = models.CharField(max_length=50)
     Date = models.DateField(auto_created=True)
@@ -20,7 +20,7 @@ class Blogs(models.Model):
         return self.Title
     
 class Menu(models.Model):
-    Coffee_image = models.ImageField(upload_to = 'static/images/')
+    Coffee_image = models.ImageField(upload_to = './backend/static/media/')
     Coffee_name = models.CharField(max_length=60)
     Cost = models.FloatField()
     Discounted_Cost = models.FloatField()
@@ -42,7 +42,7 @@ class Order(models.Model):
     transaction_Id = models.CharField(max_length=200, null=True)
 
     def __str__(self):
-        return str(self.id)
+        return str(self.customer)
 
     @property
     def get_cart_total(self):
