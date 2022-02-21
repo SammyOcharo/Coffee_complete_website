@@ -7,10 +7,13 @@
 
     <div class="content">
         <h3>fresh coffee in the morning</h3>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat labore, sint cupiditate distinctio tempora reiciendis.</p>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat labore, sint cupiditate distinctio tempora
+            reiciendis.</p>
         <a href="#menu" class="btn">get yours now</a>
     </div>
-
+    <div class="image">
+        <img src="{% static 'images/home.jpeg' %}" alt="">
+    </div>
 </section>
 
 <!-- home section ends -->
@@ -29,8 +32,10 @@
 
         <div class="content">
             <h3>what makes our coffee special?</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus qui ea ullam, enim tempora ipsum fuga alias quae ratione a officiis id temporibus autem? Quod nemo facilis cupiditate. Ex, vel?</p>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit amet enim quod veritatis, nihil voluptas culpa! Neque consectetur obcaecati sapiente?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus qui ea ullam, enim tempora ipsum
+                fuga alias quae ratione a officiis id temporibus autem? Quod nemo facilis cupiditate. Ex, vel?</p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit amet enim quod veritatis, nihil voluptas
+                culpa! Neque consectetur obcaecati sapiente?</p>
             <a href="#" class="btn">learn more</a>
         </div>
 
@@ -49,7 +54,7 @@
     <div class="box-container">
         {% for menu in All_menus%}
         <div class="box">
-            <img src="{{ menu.Coffee_image }}" alt="">
+            <img src="{{ menu.Coffee_image.url }}" alt="">
             <h3>{{ menu.Coffee_name }}</h3>
             <div class="price">$ {{menu.Cost}} <span>$ {{menu.Discounted_Cost}}</span></div>
             {% if user.is_authenticated %}
@@ -152,7 +157,8 @@
 
         <div class="box">
             <img src="{% static 'images/quote-img.png' %}" alt="" class="quote">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi nulla sit libero nemo fuga sequi nobis? Necessitatibus aut laborum, nisi quas eaque laudantium consequuntur iste ex aliquam minus vel? Nemo.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi nulla sit libero nemo fuga sequi nobis?
+                Necessitatibus aut laborum, nisi quas eaque laudantium consequuntur iste ex aliquam minus vel? Nemo.</p>
             <img src="{% static 'images/pic-1.png' %}" class="user" alt="">
             <h3>john deo</h3>
             <div class="stars">
@@ -166,7 +172,8 @@
 
         <div class="box">
             <img src="{% static 'images/quote-img.png' %}" alt="" class="quote">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi nulla sit libero nemo fuga sequi nobis? Necessitatibus aut laborum, nisi quas eaque laudantium consequuntur iste ex aliquam minus vel? Nemo.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi nulla sit libero nemo fuga sequi nobis?
+                Necessitatibus aut laborum, nisi quas eaque laudantium consequuntur iste ex aliquam minus vel? Nemo.</p>
             <img src="{% static 'images/pic-2.png' %}" class="user" alt="">
             <h3>john deo</h3>
             <div class="stars">
@@ -180,7 +187,8 @@
 
         <div class="box">
             <img src="{% static 'images/quote-img.png' %}" alt="" class="quote">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi nulla sit libero nemo fuga sequi nobis? Necessitatibus aut laborum, nisi quas eaque laudantium consequuntur iste ex aliquam minus vel? Nemo.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi nulla sit libero nemo fuga sequi nobis?
+                Necessitatibus aut laborum, nisi quas eaque laudantium consequuntur iste ex aliquam minus vel? Nemo.</p>
             <img src="{% static 'images/pic-3.png' %}" class="user" alt="">
             <h3>john deo</h3>
             <div class="stars">
@@ -206,8 +214,9 @@
 
     <div class="row">
 
-        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d31911.330310599616!2d36.85188666564162!3d-1.218372559202822!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2ske!4v1634156781986!5m2!1sen!2ske" width="600" height="450" style="border:0;"
-            allowfullscreen="" loading="lazy"></iframe>
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d31911.330310599616!2d36.85188666564162!3d-1.218372559202822!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2ske!4v1634156781986!5m2!1sen!2ske"
+            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 
         <form action="#contact" method="post" onsubmit="return mySubmitFunction(event)">
             {% csrf_token %}
@@ -243,7 +252,7 @@
         {% for blog in All_blogs %}
         <div class="box">
             <div class="image">
-                <img src="{{ blog.Images }}" alt="">
+                <img src="{{ blog.Images.url }}" alt="">
             </div>
             <div class="content">
                 <a href="#" class="title"> {{ blog.Title }}</a>

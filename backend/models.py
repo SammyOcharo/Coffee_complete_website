@@ -3,6 +3,9 @@ from django.conf import settings
 from django.contrib.auth.models import User
 # Create your models here.
 
+def user_directory_path(instance, filename):
+    return 'images/{0}'.format(filename)
+
 class GetInTouch(models.Model):
     Title = models.CharField(max_length=50, blank=False, null=True)
     Email = models.EmailField(blank=False, null=True)
@@ -10,7 +13,7 @@ class GetInTouch(models.Model):
 
 
 class Blogs(models.Model):
-    Images = models.ImageField(upload_to = './backend/static/media/')
+    Images = models.ImageField(upload_to = user_directory_path, default=" ")
     Title = models.CharField(max_length=50)
     Writer = models.CharField(max_length=50)
     Date = models.DateField(auto_created=True)
@@ -20,7 +23,7 @@ class Blogs(models.Model):
         return self.Title
     
 class Menu(models.Model):
-    Coffee_image = models.ImageField(upload_to = './backend/static/media/')
+    Coffee_image = models.ImageField(upload_to = user_directory_path, default=" ")
     Coffee_name = models.CharField(max_length=60)
     Cost = models.FloatField()
     Discounted_Cost = models.FloatField()

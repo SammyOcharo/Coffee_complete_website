@@ -48,7 +48,7 @@
     <header class="header">
 
         <a href="#" class="logo">
-            <img src="{% static 'images/logo.png' %}" alt="">
+            <img src="{% static 'images/home.jpeg' %}" alt="">
         </a>
 
         <nav class="navbar">
@@ -78,8 +78,12 @@
                 <img src="{{ item.product.Coffee_image }}" alt="">
                 <div class="content">
                     <h3>{{ item.product.Coffee_name }}
-                        <img data-product={{ item.product.id }} data-action="add" style="width: 15px; height: 15px; margin: 5px; padding-left: 3px; float: right; cursor: pointer;" src="{% static 'images/plus.jpg' %}" alt="">
-                        <img data-product={{ item.product.id }} data-action="remove" style="width: 15px; height: 15px; margin: 5px; padding-left: 3px; float: right; cursor: pointer;" src="{% static 'images/minus.jpg' %}" alt="">
+                        <img data-product={{ item.product.id }} data-action="add"
+                            style="width: 15px; height: 15px; margin: 5px; padding-left: 3px; float: right; cursor: pointer;"
+                            src="{% static 'images/plus.jpg' %}" alt="">
+                        <img data-product={{ item.product.id }} data-action="remove"
+                            style="width: 15px; height: 15px; margin: 5px; padding-left: 3px; float: right; cursor: pointer;"
+                            src="{% static 'images/minus.jpg' %}" alt="">
                     </h3>
                     <p class="product-quantity">{{ item.quantity }}</p>
                     <div class="price">$ {{ item.get_total | floatformat:2 }}/-</div>
@@ -100,20 +104,25 @@
         <div class="social-media">
             <p class="mb-0 d-flex">
                 {% if user.is_authenticated %}
-                <a href="#" style="margin-top: 10px; margin-bottom: 4px;" class="d-flex align-items-center justify-content-center"><button type="button" class="btn btn-dark">
-                    Profile
+                <a href="#" style="margin-top: 10px; margin-bottom: 4px;"
+                    class="d-flex align-items-center justify-content-center"><button type="button" class="btn btn-dark">
+                        Profile
                     </button>
                 </a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                <a href="{% url 'handlelogout' %}" style="margin-top: 10px; margin-bottom: 4px;" class="d-flex align-items-center justify-content-center"><button type="button" class="btn btn-dark">
-                    Logout
+                <a href="{% url 'handlelogout' %}" style="margin-top: 10px; margin-bottom: 4px;"
+                    class="d-flex align-items-center justify-content-center"><button type="button" class="btn btn-dark">
+                        Logout
                     </button>
                 </a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {% else %}
-                <a href="{% url 'signup' %}" style="margin-top: 10px;" class="d-flex align-items-center justify-content-center"><button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalCenter" >
-                    Register
+                <a href="{% url 'signup' %}" style="margin-top: 10px;"
+                    class="d-flex align-items-center justify-content-center"><button type="button" class="btn btn-dark"
+                        data-toggle="modal" data-target="#exampleModalCenter">
+                        Register
                     </button>
                 </a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                <a href="{% url 'login' %}" style="margin-top: 10px; margin-right: 5px; margin-bottom: 4px;" class="d-flex align-items-center justify-content-center"><button type="button" class="btn btn-dark">
-                    Login
+                <a href="{% url 'login' %}" style="margin-top: 10px; margin-right: 5px; margin-bottom: 4px;"
+                    class="d-flex align-items-center justify-content-center"><button type="button" class="btn btn-dark">
+                        Login
                     </button>
                 </a>{% endif %}
             </p>
@@ -126,8 +135,8 @@
         <div class="alert alert-{{ message.tags }} mb-0 alert-dismissible fade show" role="alert">
             {{ message }}
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
         {% endfor %}
     </div>
